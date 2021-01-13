@@ -43,9 +43,11 @@ const Search = () => {
   });
 
   useEffect(() => {
-    if (term) {
-      getSearch();
-    }
+    setTimeout(() => {
+      if (term) {
+        getSearch();
+      }
+    }, 500);
   });
 
   return (
