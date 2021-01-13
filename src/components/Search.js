@@ -27,7 +27,10 @@ const Search = () => {
     return (
       <div className="item" key={result.pageid}>
         <div className="right floated content">
-          <a href={`https://en.wikipedia.org?curid=${result.pageid}`} className="ui button">
+          <a
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+            className="ui button"
+          >
             Go
           </a>
         </div>
@@ -40,7 +43,9 @@ const Search = () => {
   });
 
   useEffect(() => {
-    getSearch();
+    if (term) {
+      getSearch();
+    }
   });
 
   return (
