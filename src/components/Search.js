@@ -42,16 +42,21 @@ const Search = () => {
         console.error(err.message);
       }
     };
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        getSearch();
-      }
-    }, 1000);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [term]);
+    if (term && !results.length) {
+      getSearch();
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          getSearch();
+        }
+      }, 1000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [term, results]);
 
   return (
     <div>
