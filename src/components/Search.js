@@ -5,24 +5,6 @@ const Search = () => {
   const [term, setTerm] = useState("programming");
   const [results, setResults] = useState([]);
 
-  const getSearch = async () => {
-    try {
-      const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
-        params: {
-          action: "query",
-          list: "search",
-          srsearch: term,
-          origin: "*",
-          format: "json",
-        },
-      });
-
-      setResults(data.query.search);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   const renderedResults = results.map((result) => {
     return (
       <div className="item" key={result.pageid}>
@@ -43,12 +25,33 @@ const Search = () => {
   });
 
   useEffect(() => {
-    setTimeout(() => {
+    const getSearch = async () => {
+      try {
+        const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
+          params: {
+            action: "query",
+            list: "search",
+            srsearch: term,
+            origin: "*",
+            format: "json",
+          },
+        });
+
+        setResults(data.query.search);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    const timeoutId = setTimeout(() => {
       if (term) {
         getSearch();
       }
-    }, 500);
-  });
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [term]);
 
   return (
     <div>
