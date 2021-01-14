@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Dropdown from "./components/Dropdown";
+import Route from "./components/Route";
 import Search from "./components/Search";
 import Translate from "./components/Translate";
 
@@ -46,12 +47,39 @@ const showTranslate = () => {
   }
 };
 
+const showConponent = (route, component) => {
+  if (window.location.pathname === route) {
+    return component;
+  } else {
+    return null;
+  }
+};
+
 const App = () => {
   const [selected, setSelected] = useState(options[0]);
 
   return (
     <div>
-      {showAccordion()} {showDropdown()} {showList()} {showTranslate()}
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+
+      <Route path="/list">
+        <Search />
+      </Route>
+
+      <Route path="/dropdown">
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
+      </Route>
+
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 };
