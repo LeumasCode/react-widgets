@@ -1,6 +1,7 @@
 import React from "react";
 import Accordion from "./components/Accordion";
-import Search from './components/Search'
+import Dropdown from "./components/Dropdown";
+import Search from "./components/Search";
 
 const items = [
   { title: "what is react", content: "React is a javascript framework" },
@@ -14,10 +15,16 @@ const items = [
   },
 ];
 
+const options = [
+  { label: "The Color Red", value: "Red" },
+  { label: "The Color Green", value: "Green" },
+  { label: "The Color Blue", value: "Blue" },
+];
+
 const App = () => {
   return (
     <div>
-      <Search/>
+      <Dropdown options = {options}/>
     </div>
   );
 };
