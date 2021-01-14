@@ -1,0 +1,24 @@
+import React, { useState, useEffect } from "react";
+import Dropdown from "./Dropdown";
+
+const options = [
+  { label: "Africaans", value: "af" },
+  { label: "Arabic", value: "ar" },
+  { label: "Hindi", value: "hi" },
+];
+
+const Translate = () => {
+  const [language, setLanguage] = useState(options[0]);
+  return (
+    <div>
+      <Dropdown
+        label="Select a Language"
+        options={options}
+        selected={language}
+        onSelectedChange={setLanguage}
+      />
+    </div>
+  );
+};
+
+export default Translate;
